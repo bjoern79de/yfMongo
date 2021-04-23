@@ -134,9 +134,13 @@ class yfMongo:
                               date.today().strftime("%Y/%m/%d"),
                               symbol=ticker["sym"])
       else:
-          self.fetchInterval("1970/01/01",
+          size = self.fetchInterval("1970/01/01",
                              date.today().strftime("%Y/%m/%d"),
                              symbol=ticker["sym"])
+        
+          if size == 0:
+            self.yfdb.symbols.remove({'sym': ticker["sym"]})
+            print("Delete empty symbol " + ticker["sym"])
     tickers.close() 
 
   #
@@ -163,9 +167,8 @@ class yfMongo:
         + symbol['sym'] + "' (" + str(len(data)) + " entries)")
       if len(data) > 0:
         self.yfdb.timeline.insert(data)
-      else:
-        self.yfdb.symbols.remove({'sym':symbol})
-        print("Delete empty symbol " + symbol['sym'])
+  
+    return len(data)
 
   #
   # Loads symbols from a file, separated by spaces or commas
