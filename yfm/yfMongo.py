@@ -163,6 +163,8 @@ class yfMongo:
         + symbol['sym'] + "' (" + str(len(data)) + " entries)")
       if len(data) > 0:
         self.yfdb.timeline.insert(data)
+      else:
+        self.yfdb.symbols.remove({'sym':symbol})
 
   #
   # Loads symbols from a file, separated by spaces or commas
