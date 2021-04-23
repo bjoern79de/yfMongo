@@ -124,7 +124,7 @@ class yfMongo:
   # date in the data until today
   #
   def update (self):
-    tickers = self.yfdb.symbols.find()
+    tickers = self.yfdb.symbols.find(no_cursor_timeout = True)
     for ticker in tickers:
       tickerTimeline = list(self.yfdb.timeline.find({'ticker':ticker["sym"]}))
       if len(tickerTimeline) > 0:
@@ -136,7 +136,8 @@ class yfMongo:
       else:
           self.fetchInterval("1970/01/01",
                              date.today().strftime("%Y/%m/%d"),
-                             symbol=ticker["sym"]) 
+                             symbol=ticker["sym"])
+    tickers.close() 
 
   #
   # Fetches symbol data for the interval between startDate and endDate
