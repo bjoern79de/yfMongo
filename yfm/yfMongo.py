@@ -165,6 +165,7 @@ class yfMongo:
         self.yfdb.timeline.insert(data)
       else:
         self.yfdb.symbols.remove({'sym':symbol})
+        print("Delete empty symbol " + symbol['sym'])
 
   #
   # Loads symbols from a file, separated by spaces or commas
