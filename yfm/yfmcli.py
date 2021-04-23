@@ -114,7 +114,7 @@ def main():
   port = 27017
   user = os.environ.get('MONGODB_SERVICE_USER', 'root')
   password = os.environ.get('MONGODB_SERVICE_PASSWORD', '')
-  database = os.environ.get('YFM_DB', '')
+  database = os.environ.get('YFM_DB', 'yfm')
   cli = yfm (sys.argv, hostname, port, database, user, password, verbose=True)
 
 if __name__ == "__main__":
