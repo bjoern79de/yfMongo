@@ -134,7 +134,7 @@ class yfMongo:
                               date.today().strftime("%Y/%m/%d"),
                               symbol=ticker["sym"])
       else:
-          self.fetchInterval("2000/01/01",
+          self.fetchInterval("1970/01/01",
                              date.today().strftime("%Y/%m/%d"),
                              symbol=ticker["sym"]) 
 
