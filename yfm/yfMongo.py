@@ -161,14 +161,16 @@ class yfMongo:
       symbols = self.yfdb.symbols.find()
     else:
       symbols = self.yfdb.symbols.find ({'sym':symbol})
+    size = 0
     for symbol in symbols:
       data = yfetcher.getHistAsJson(symbol['sym'], startDate.replace("/",""), endDate.replace("/",""))
       self.sprint ("Adding '[" + startDate +", " + endDate  + "]' data for symbol '" 
         + symbol['sym'] + "' (" + str(len(data)) + " entries)")
       if len(data) > 0:
         self.yfdb.timeline.insert(data)
+        size += len(data)
   
-    return len(data)
+    return size
 
   #
   # Loads symbols from a file, separated by spaces or commas
